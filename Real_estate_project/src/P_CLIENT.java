@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 
+ * @author Divya
  */
 public class P_CLIENT {
     
@@ -93,9 +93,6 @@ public class P_CLIENT {
         this.address = ADDRESS;
     }
     
-    
-    // create a function to add a new client
-    // first create the client in the database
     public boolean addNewClient(P_CLIENT client)
     {
         PreparedStatement ps;
@@ -166,7 +163,7 @@ public class P_CLIENT {
     }
     
     
-    // create a unction to return an arraylist of clients
+    // create a function to return an arraylist of clients
     public ArrayList<P_CLIENT> clientsList()
     {
         ArrayList<P_CLIENT> list = new ArrayList<>();
