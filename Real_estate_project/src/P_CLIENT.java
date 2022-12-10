@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 1BestCsharp
+ * @author 
  */
 public class P_CLIENT {
     
