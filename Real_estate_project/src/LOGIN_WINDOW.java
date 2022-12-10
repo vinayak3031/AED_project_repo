@@ -10,15 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
  *
- * @author 1BestCsharp
+ * @author 91992
  */
 public class LOGIN_WINDOW extends javax.swing.JFrame {
 
@@ -30,12 +26,7 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
         
         /*
         
-           - Download The Java MySQL Database Connector From This Link:
-             -> https://dev.mysql.com/downloads/connector/j/5.1.html
-           - add the connector to the project
-           - open xampp & start apache and mysql
-           - create the mysql database using phpmyadmin
-           - create a class for the connection
+        
         */
         
         
@@ -280,7 +271,8 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Invalid Username or Password","Wrong Data",2);
                 }
                 
-            } catch (SQLException ex) {
+            } 
+            catch (SQLException ex) {
                 Logger.getLogger(LOGIN_WINDOW.class.getName()).log(Level.SEVERE, null, ex);
             }
             
