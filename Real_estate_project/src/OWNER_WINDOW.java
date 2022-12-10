@@ -7,15 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author 1BestCsharp
+ * @author Divya
  */
 public class OWNER_WINDOW extends javax.swing.JFrame {
 
@@ -43,23 +38,14 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
     }
     
     
-    // we will create a function to populate the jtable with all the owners data using the arraylist
-    // after that, when the user select an owner from the jtable all the information 
-    // will be displayed in jtextfields
     public void fillJtableWithOwnersData()
     {
         P_OWNER owner = new P_OWNER();
         ArrayList<P_OWNER> ownersList = owner.ownersList();
-        
-        // the jtable columns
+
         String[] colNames = {"ID","First Name","Last Name","Phone","Email","Address"};
-        
-        // the jtable row
-        // ownersList.size() = the size of the arraylist
-        // 6 = the number of columns
         Object[][] rows = new Object[ownersList.size()][6];
-        
-        // add data form the list to the rows
+
         for(int i = 0; i < ownersList.size(); i++)
         {
             rows[i][0] = ownersList.get(i).getId();
@@ -358,9 +344,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Add_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_OwnerActionPerformed
 
-        // add a new owner
         
-        // get the owner data
         String fname = jTextField_FName.getText();
         String lname = jTextField_LName.getText();
         String phone = jTextField_Phone.getText();
@@ -368,9 +352,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
         String address = jTextArea_Address.getText();
         
         P_OWNER owner = new P_OWNER();
-        
-        // before inserting a new owner we need to check if the required data are empty
-        // required data -> first name, last name, phone, and address
         
         if( fname.trim().equals("") || lname.trim().equals("") || phone.trim().equals("") || address.trim().equals("") )
         {
@@ -391,8 +372,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Edit_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_OwnerActionPerformed
 
-        // edit the owner data
-        // get the owner data
         
         String fname = jTextField_FName.getText();
         String lname = jTextField_LName.getText();
@@ -406,8 +385,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
             
             int ownerId = Integer.valueOf(jTextField_Id.getText());
             
-            // before editing the owner data we need to check if the required data are empty
-            // required data -> first name, last name, phone, and address
             
             if( fname.trim().equals("") || lname.trim().equals("") || phone.trim().equals("") || address.trim().equals("") )
             {
@@ -498,9 +475,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_RefreshActionPerformed
 
     private void jButton_Owner_PropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Owner_PropertiesActionPerformed
-       
-        // Here We Will Show The Selected OWner Properties in a new form
-        // we will do it later when we add some properties
+
         
         try
         {
