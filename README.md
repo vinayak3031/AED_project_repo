@@ -14,13 +14,13 @@ Any form of rental property, whether it be residential or commercial, can use th
 
 Why are management services would be beneficial? 
 
-You have too many properties for you to manage adequately. 
+1. You have too many properties for you to manage adequately. 
 
-For your real estate business, you don't want to hire staff. 
+2. For your real estate business, you don't want to hire staff. 
 
-You can't physically visit the investment property since it's too far away. 
+3. You can't physically visit the investment property since it's too far away. 
 
-Without significantly hurting your financial flow, you can easily afford the costs. 
+4. Without significantly hurting your financial flow, you can easily afford the costs. 
 
 PROBLEM STATEMENT 
 
