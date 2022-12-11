@@ -33,6 +33,15 @@ public class P_PROPERTY {
     private boolean backyard;
     private boolean garage;
     private String description;
+    private String flag;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
     public int getId() {
         return id;
@@ -151,7 +160,7 @@ public class P_PROPERTY {
     
     public P_PROPERTY(int ID, int TYPE, int SIZE, int OWNER_ID, String PRICE, 
                       String ADRESS, int BEDROOMS, int BATHROOMS, int AGE,
-                      boolean BALCONY, boolean POOL, boolean BACKYARD, boolean GARAGE, String DESCRIPTION)
+                      boolean BALCONY, boolean POOL, boolean BACKYARD, boolean GARAGE, String DESCRIPTION, String flag)
     {
         this.id = ID;
         this.type = TYPE;
@@ -167,6 +176,7 @@ public class P_PROPERTY {
         this.backyard = BACKYARD;
         this.garage = GARAGE;
         this.pool = POOL;
+        this.flag = flag;
     }
     
     // create a function to add a new property
@@ -174,7 +184,7 @@ public class P_PROPERTY {
     {
         PreparedStatement ps;
         
-        String addQuery = "INSERT INTO `the_property`(`type`, `square_feet`, `ownerId`, `price`, `address`, `bedrooms`, `bathrooms`, `age`, `balcony`, `pool`, `backyard`, `garage`, `description`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String addQuery = "INSERT INTO `the_property`(`type`, `square_feet`, `ownerId`, `price`, `address`, `bedrooms`, `bathrooms`, `age`, `balcony`, `pool`, `backyard`, `garage`, `description`, `verified`, `listed`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             
@@ -192,6 +202,9 @@ public class P_PROPERTY {
             ps.setBoolean(11, property.isBackyard());
             ps.setBoolean(12, property.isGarage());
             ps.setString(13, property.getDescription());
+            ps.setString(14,"N");
+            ps.setString(15,"N");
+
             
             return (ps.executeUpdate() > 0);
             
@@ -202,8 +215,45 @@ public class P_PROPERTY {
         
     }
     
+    public boolean addNewListing(P_PROPERTY property)
+    {
+        PreparedStatement ps;
+        
+        String addQuery = "INSERT INTO `property_listed`(`propertyId`,`ownerId`) VALUES (?,?)";
+        
+        try {
+            
+            ps = THE_CONNECTION.getTheConnection().prepareStatement(addQuery);
+            ps.setInt(1, property.getId());
+            ps.setInt(2, property.getOwnerId());
+            
+            return (ps.executeUpdate() > 0);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(P_PROPERTY.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+    }
     
-    // create a function to edit a selected property
+    public boolean verifyProperty(int propertyId) {
+        PreparedStatement ps;
+        
+        String editQuery = "UPDATE `the_property` SET verified = 'Y' WHERE `id`=?";
+        
+        try {
+            
+            ps = THE_CONNECTION.getTheConnection().prepareStatement(editQuery);
+            ps.setInt(1, propertyId);
+            
+            return (ps.executeUpdate() > 0);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(P_PROPERTY.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     public boolean editProperty(P_PROPERTY property)
     {
         PreparedStatement ps;
@@ -238,7 +288,6 @@ public class P_PROPERTY {
     }
     
     
-    // create a function to delete a selected property
     public boolean removeProperty(int propertyId)
     {
         PreparedStatement ps;
@@ -258,7 +307,6 @@ public class P_PROPERTY {
         } 
     }
     
-    // create a function to search for a property by id
     public P_PROPERTY findProperty(int propertyId)
     {
         PreparedStatement ps;
@@ -289,7 +337,8 @@ public class P_PROPERTY {
                                           rs.getBoolean("pool"),  
                                           rs.getBoolean("backyard"),  
                                           rs.getBoolean("garage"), 
-                                          rs.getString("description"));
+                                          rs.getString("description"),
+                                          rs.getString("verified"));
             }
             
             return property;
@@ -302,15 +351,13 @@ public class P_PROPERTY {
         return property;
     }
     
-    
-    // create a function to return an arraylist of properties
-    public ArrayList<P_PROPERTY> propertiesList()
+    public ArrayList<P_PROPERTY> propertiesListLawyer()
     {
         ArrayList<P_PROPERTY> list = new ArrayList<>();
         Statement st;
         ResultSet rs;
         
-        String selectQuery = "SELECT * FROM `the_property`";
+        String selectQuery = "SELECT * FROM `the_property` WHERE listed = \"Y\" AND verified = \"N\"";
         
         try {
             
@@ -334,7 +381,97 @@ public class P_PROPERTY {
                                           rs.getBoolean("pool"),  
                                           rs.getBoolean("backyard"),  
                                           rs.getBoolean("garage"), 
-                                          rs.getString("description"));
+                                          rs.getString("description"),
+                rs.getString("verified"));
+                
+                list.add(property);
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(P_PROPERTY.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+    
+    public ArrayList<P_PROPERTY> propertiesList()
+    {
+        ArrayList<P_PROPERTY> list = new ArrayList<>();
+        Statement st;
+        ResultSet rs;
+        
+        String selectQuery = "SELECT * FROM `the_property` WHERE listed = \"Y\" AND verified = \"Y\"";
+        
+        try {
+            
+            st = THE_CONNECTION.getTheConnection().createStatement();
+            rs = st.executeQuery(selectQuery);
+            
+            P_PROPERTY property;
+            
+            while (rs.next()) {
+                
+                property = new P_PROPERTY(rs.getInt("id"),
+                                          rs.getInt("type"), 
+                                          rs.getInt("square_feet"), 
+                                          rs.getInt("ownerId"),  
+                                          rs.getString("price"), 
+                                          rs.getString("address"), 
+                                          rs.getInt("bedrooms"), 
+                                          rs.getInt("bathrooms"), 
+                                          rs.getInt("age"), 
+                                          rs.getBoolean("balcony"), 
+                                          rs.getBoolean("pool"),  
+                                          rs.getBoolean("backyard"),  
+                                          rs.getBoolean("garage"), 
+                                          rs.getString("description"),
+                rs.getString("verified"));
+                
+                list.add(property);
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(P_PROPERTY.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+    
+    // create a function to return an arraylist of properties
+    public ArrayList<P_PROPERTY> propertiesListed()
+    {
+        ArrayList<P_PROPERTY> list = new ArrayList<>();
+        Statement st;
+        ResultSet rs;
+        
+        String selectQuery = "SELECT * FROM `the_property` WHERE listed = \"N\" AND verified = \"N\"";
+        
+        try {
+            
+            st = THE_CONNECTION.getTheConnection().createStatement();
+            rs = st.executeQuery(selectQuery);
+            
+            P_PROPERTY property;
+            
+            while (rs.next()) {
+                
+                property = new P_PROPERTY(rs.getInt("id"),
+                                          rs.getInt("type"), 
+                                          rs.getInt("square_feet"), 
+                                          rs.getInt("ownerId"),  
+                                          rs.getString("price"), 
+                                          rs.getString("address"), 
+                                          rs.getInt("bedrooms"), 
+                                          rs.getInt("bathrooms"), 
+                                          rs.getInt("age"), 
+                                          rs.getBoolean("balcony"), 
+                                          rs.getBoolean("pool"),  
+                                          rs.getBoolean("backyard"),  
+                                          rs.getBoolean("garage"), 
+                                          rs.getString("description"),
+                rs.getString("verified"));
                 
                 list.add(property);
                 
@@ -348,8 +485,6 @@ public class P_PROPERTY {
     }
     
     
-    // create a function to return a list of property depending on the selected type
-    // create a function to return an arraylist of properties
     public ArrayList<P_PROPERTY> propertiesListByType(int typeId)
     {
         ArrayList<P_PROPERTY> list = new ArrayList<>();
@@ -381,7 +516,8 @@ public class P_PROPERTY {
                                           rs.getBoolean("pool"),  
                                           rs.getBoolean("backyard"),  
                                           rs.getBoolean("garage"), 
-                                          rs.getString("description"));
+                                          rs.getString("description"),
+                rs.getString("verified"));
                 
                 list.add(property);
                 
@@ -395,8 +531,6 @@ public class P_PROPERTY {
     }
     
     
-    
-    // create a function to return an arraylist of owner properties
     public ArrayList<P_PROPERTY> propertiesListByOwner(int ownerId)
     {
         ArrayList<P_PROPERTY> list = new ArrayList<>();
@@ -428,7 +562,8 @@ public class P_PROPERTY {
                                           rs.getBoolean("pool"),  
                                           rs.getBoolean("backyard"),  
                                           rs.getBoolean("garage"), 
-                                          rs.getString("description"));
+                                          rs.getString("description"),
+                rs.getString("verified"));
                 
                 list.add(property);
                 

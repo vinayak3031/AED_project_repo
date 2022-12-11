@@ -10,45 +10,23 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author 1BestCsharp
+ * @author Divya
  */
 public class LOGIN_WINDOW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LOGIN_WINDOW
-     */
     public LOGIN_WINDOW() {
         initComponents();
         
-        /*
-        
-           - Download The Java MySQL Database Connector From This Link:
-             -> https://dev.mysql.com/downloads/connector/j/5.1.html
-           - add the connector to the project
-           - open xampp & start apache and mysql
-           - create the mysql database using phpmyadmin
-           - create a class for the connection
-        */
-        
-        
-        // center the form
+      
         this.setLocationRelativeTo(null);
         
-        // display image in the jlabel
         jLabel_Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/building.png")));
         jLabel_Username_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/username_field.png")));
         jLabel_Password_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password_field.png")));
         
         
-        // add a bottom border to the jlabel title
         Border title_border = BorderFactory.createMatteBorder(0, 0, 3, 0, Color.RED);
         jLabel_Title.setBorder(title_border);
     }
@@ -186,21 +164,18 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
 
     private void jTextField_UsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_UsernameFocusGained
         
-        // remove the text from the text field on focus gained
-        // if the text field text = "username"
         
         if(jTextField_Username.getText().trim().toLowerCase().equals("username"))
         {
             jTextField_Username.setText("");
-            // change the text field color to black
+
             jTextField_Username.setForeground(Color.black);
         }
         
     }//GEN-LAST:event_jTextField_UsernameFocusGained
 
     private void jTextField_UsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_UsernameFocusLost
-        
-        // if the text field is empty -> set it to 'Username'
+
         if(jTextField_Username.getText().trim().equals("") ||
            jTextField_Username.getText().trim().toLowerCase().equals("username"))
         {
@@ -212,8 +187,7 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
 
     private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
        
-        // clear the password field on focus if the text = password
-        // get the password
+
         String password = String.valueOf(jPasswordField1.getPassword());
         if(password.trim().toLowerCase().equals("password"))
         {
@@ -224,8 +198,7 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1FocusGained
 
     private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
-        
-        // if the password field is empty -> set it to 'password'
+
         String password = String.valueOf(jPasswordField1.getPassword());
         if(password.trim().equals("") ||
            password.trim().toLowerCase().equals("password"))
@@ -240,46 +213,12 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
        
         String username = jTextField_Username.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-//        String role = comboBox.getSelectedItem().toString();
         PreparedStatement ps;
         ResultSet rs;
         
         String selectquery = "SELECT * FROM `users` WHERE `username` = ? AND password = ?";
         
-//                     ps = THE_CONNECTION.getTheConnection().prepareStatement(selectquery);
-//                
-//                ps.setString(1, username);
-//                ps.setString(2, password);
-//                
-//                rs = ps.executeQuery();
-//                
-//                if(rs.next())
-//                {
-//                    if(rs.getString(4).equals("Manager")) {
-//                        MANAGER_WINDOW mainform = new MANAGER_WINDOW();
-//                        mainform.setVisible(true);
-//                        mainform.pack();
-//                        mainform.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//                        this.dispose();
-//                    } else {
-//                   
-//                    MAIN_APP_WINDOW mainform = new MAIN_APP_WINDOW();
-//                    mainform.setVisible(true);
-//                    mainform.pack();
-//                    mainform.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//               
-//                    this.dispose();
-//                    }
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Invalid Username or Password","Wrong Data",2);
-//                }
-//                
-//            } catch (SQLException ex) {
-//                Logger.getLogger(LOGIN_WINDOW.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-        
-        // check the fields value
+
         if(username.trim().toLowerCase().equals("username") || 
            password.trim().toLowerCase().equals("password"))
         {
@@ -305,7 +244,7 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
                         ownerform.setExtendedState(JFrame.MAXIMIZED_BOTH);
                         this.dispose();
                     } else if(rs.getString(4).equals("Client")){
-                        CLIENT_APP_WINDOW clientform = new CLIENT_APP_WINDOW();
+                        CLIENT_APP_WINDOW clientform = new CLIENT_APP_WINDOW(rs.getInt(1));
                         clientform.setVisible(true);
                         clientform.pack();
                         clientform.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -335,7 +274,7 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
                         insuranceform.setExtendedState(JFrame.MAXIMIZED_BOTH);
                         this.dispose();
                     } else if(rs.getString(4).equals("Manager")){
-                        LISTER_APP_WINDOW managerform = new LISTER_APP_WINDOW();
+                        MANAGER_WINDOW managerform = new MANAGER_WINDOW();
                         managerform.setVisible(true);
                         managerform.pack();
                         managerform.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -360,40 +299,14 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
             
             
         }
-
-//Manager
-//Insurance
-       
+     
     }//GEN-LAST:event_jButton_LoginActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LOGIN_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LOGIN_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LOGIN_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LOGIN_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LOGIN_WINDOW().setVisible(true);

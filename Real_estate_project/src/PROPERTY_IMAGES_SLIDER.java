@@ -7,56 +7,34 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author 1BestCsharp
+ * @author diksharawat
  */
 public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PROPERTY_IMAGES_SLIDER
-     */
-    
-    // get the property id
     static int propertyId;
     
-    // images list
     ArrayList<byte[]> imagesList;
     
-    // the image index
     int index=0;
     
     public PROPERTY_IMAGES_SLIDER(int pId) {
         initComponents();
         
         this.propertyId = pId;
-        
-        // set border to the jlabel image
         Border jlabel_image_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0,0,0));
         jLabel_Image.setBorder(jlabel_image_border);
-        
-        // set border to the next & previous jlabel
         Border jlabel_nav_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(255,69,0));
         jLabel_Next.setBorder(jlabel_nav_border);
         jLabel_Previous.setBorder(jlabel_nav_border);
-        
-        
-        // get the images using the hashmap
         HashMap<byte[], Integer> map = new P_PROPERTY().propertyImagesList(propertyId);
         imagesList = new ArrayList<>(map.keySet());
         
         displayImage(index);
         
     }
-
     
-    // create a function to display the image by index
     public void displayImage(int imageIndex)
     {
         
@@ -166,7 +144,6 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
 
     private void jLabel_NextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_NextMouseClicked
        
-        // show the next image
         index++;
         
         if(index >= imagesList.size()) index = imagesList.size() - 1;
@@ -177,7 +154,6 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
 
     private void jLabel_PreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PreviousMouseClicked
        
-        // show the previous image
         index--;
         
         if(index < 0) index = 0;
