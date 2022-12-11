@@ -28,4 +28,4 @@ Traditionally, keeping track of consumer information in registers is a time-cons
 
 JOTTING DOWN and SKETCHING IDEAS 
 
-![ideas 1](https://user-images.githubusercontent.com/114785167/206930881-88bcb34f-b938-4fb1-99ae-579c6a6127fe.jpeg) ![Ideas 2](https://user-images.githubusercontent.com/114785167/206930887-947908eb-6cf7-403a-93c4-e4239ac676a3.jpeg)
+![Grid Ideas](https://user-images.githubusercontent.com/114785167/206931263-45ef30e5-3e74-48fe-925e-8602cf0be71f.png)
