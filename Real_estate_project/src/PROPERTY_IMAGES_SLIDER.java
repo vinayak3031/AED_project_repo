@@ -7,17 +7,29 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
- * @author diksharawat
+ * @author 1BestCsharp
  */
 public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
 
+    /**
+     * Creates new form PROPERTY_IMAGES_SLIDER
+     */
+    
+    // get the property id
     static int propertyId;
     
+    // images list
     ArrayList<byte[]> imagesList;
     
+    // the image index
     int index=0;
     
     public PROPERTY_IMAGES_SLIDER(int pId) {
@@ -25,14 +37,17 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
         
         this.propertyId = pId;
         
+        // set border to the jlabel image
         Border jlabel_image_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0,0,0));
         jLabel_Image.setBorder(jlabel_image_border);
         
+        // set border to the next & previous jlabel
         Border jlabel_nav_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(255,69,0));
         jLabel_Next.setBorder(jlabel_nav_border);
         jLabel_Previous.setBorder(jlabel_nav_border);
         
         
+        // get the images using the hashmap
         HashMap<byte[], Integer> map = new P_PROPERTY().propertyImagesList(propertyId);
         imagesList = new ArrayList<>(map.keySet());
         
@@ -40,6 +55,8 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
         
     }
 
+    
+    // create a function to display the image by index
     public void displayImage(int imageIndex)
     {
         
@@ -149,6 +166,7 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
 
     private void jLabel_NextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_NextMouseClicked
        
+        // show the next image
         index++;
         
         if(index >= imagesList.size()) index = imagesList.size() - 1;
@@ -159,6 +177,7 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
 
     private void jLabel_PreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PreviousMouseClicked
        
+        // show the previous image
         index--;
         
         if(index < 0) index = 0;
@@ -199,7 +218,30 @@ public class PROPERTY_IMAGES_SLIDER extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_SLIDER.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_SLIDER.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_SLIDER.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_SLIDER.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PROPERTY_IMAGES_SLIDER(propertyId).setVisible(true);

@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author diksharawat
+ * @author Divya
  */
 public class P_PROPERTY {
 
@@ -456,10 +457,10 @@ public class P_PROPERTY {
             
             try {
                 
-                FileInputStream propertyImage = new FileInputStream(new File(the_image_path));
+                InputStream propertyImage = new FileInputStream(the_image_path);
                 ps = THE_CONNECTION.getTheConnection().prepareStatement(addQuery);
                 ps.setInt(1, propertyId);
-                ps.setBinaryStream(2, propertyImage);
+                ps.setBlob(2, propertyImage);
                 
                 return (ps.executeUpdate() > 0);   
                  

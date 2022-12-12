@@ -6,32 +6,47 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
- * @author diksharawat
+ * @author 1BestCsharp
  */
 public class PROPERTY_WINDOW extends javax.swing.JFrame {
 
+    /**
+     * Creates new form PROPERTY_WINDOW
+     */
+    
     P_TYPE type = new P_TYPE();
     HashMap<String, Integer> map = type.getTypesMap();
     
     public PROPERTY_WINDOW() {
         initComponents();
         
+        
+        // set border to the jpanel title
         Border panel_title_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(26,138,32));
         jPanel_Title.setBorder(panel_title_border);
         
-        
+        // set border to the jbuttons
         Border button_border = BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(255,255,255));
         jButton_Add_Property.setBorder(button_border);
         jButton_Edit_Property.setBorder(button_border);
         jButton_Remove_Property.setBorder(button_border);
         jButton_Show_Properties.setBorder(button_border);
-       
+        
+        // populate the combobox
         bindCombo();
         
     }
 
+    
+    // create a function to populate the jcombobox with types data
     public void bindCombo()
     {
         for(String s : map.keySet())
@@ -415,6 +430,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
 
         try{
 
+            // deleting the selected property from the system
             int id = Integer.valueOf(jTextField_Id.getText());
 
             P_PROPERTY property = new P_PROPERTY();
@@ -425,6 +441,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
             }
             else{
 
+                // show a confirmation message before deleting the type
                 int yes_or_no = JOptionPane.showConfirmDialog(null, "Do You Want To Delete This Property", "Delete Property", JOptionPane.YES_NO_OPTION);
 
                 if(yes_or_no == JOptionPane.YES_OPTION)
@@ -433,6 +450,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
                     {
                         JOptionPane.showMessageDialog(null, "Property Data Deleted", "Delete Property", 1);
                         
+                        // clear all fields values after deleting the property
                         jTextField_Id.setText("");
                         jTextArea_Address.setText("");
                         jTextArea_Description.setText("");
@@ -467,6 +485,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Edit_PropertyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_PropertyActionPerformed
 
+        // edit the selected property
         
         try
         { 
@@ -482,6 +501,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
           boolean haveBackyard = false;
           boolean haveGarage = false;
           
+          //check if the property have a balcony,pool,backyard and a garage
           if(jCheckBox_Balcony.isSelected()) haveBalcony = true;
           if(jCheckBox_Pool.isSelected()) havePool = true;
           if(jCheckBox_Backyard.isSelected()) haveBackyard = true;
@@ -512,9 +532,13 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Add_PropertyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_PropertyActionPerformed
 
+        // add a new property to the system
+        // get the property data form text fields
+        
         try
         {
-          
+          // we need to populate the jcombobx with the types names
+          // and get the value(the value is the integer associated with the string )  
           int type = map.get(jComboBox_Type.getSelectedItem().toString()); 
           int ownerId = Integer.valueOf(jTextField_OwnerId.getText());
           int squareFeet = Integer.valueOf(jTextField_SquareFeet.getText());
@@ -526,6 +550,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
           boolean haveBackyard = false;
           boolean haveGarage = false;
           
+          //check if the property have a balcony,pool,backyard and a garage
           if(jCheckBox_Balcony.isSelected()) haveBalcony = true;
           if(jCheckBox_Pool.isSelected()) havePool = true;
           if(jCheckBox_Backyard.isSelected()) haveBackyard = true;
@@ -556,6 +581,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Show_PropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Show_PropertiesActionPerformed
         
+        // show all properties in a new form
         SHOW_PROPERTIES_WINDOW showPropertyForm = new SHOW_PROPERTIES_WINDOW();
         showPropertyForm.setVisible(true);
         showPropertyForm.pack();        
@@ -566,11 +592,16 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Search_PropertyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Search_PropertyActionPerformed
         
+        
+        // uncheck the checkboxes
         jCheckBox_Balcony.setSelected(false);
         jCheckBox_Backyard.setSelected(false);
         jCheckBox_Pool.setSelected(false);
         jCheckBox_Garage.setSelected(false);
         
+        
+        // search property by id 
+        // and display the property data
         
         try{
             
@@ -586,6 +617,7 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
                 jTextField_SquareFeet.setText(String.valueOf(property.getSize()));
                 jTextField_OwnerId.setText(String.valueOf(property.getOwnerId()));
                
+                // displaying the property type in the combobox
                 for(Object type : map.keySet())
                 {
                     if(map.get(type).equals(property.getType()))
@@ -622,7 +654,30 @@ public class PROPERTY_WINDOW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PROPERTY_WINDOW().setVisible(true);

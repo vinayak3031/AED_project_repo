@@ -14,13 +14,22 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
- * @author diksharawat
+ * @author 1BestCsharp
  */
 public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
+    /**
+     * Creates new form PROPERTY_IMAGES_WINDOW
+     */
+    
     P_TYPE type = new P_TYPE();
     HashMap<String, Integer> map = type.getTypesMap();
     String property_image_path = "";
@@ -29,25 +38,32 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
     public PROPERTY_IMAGES_WINDOW() {
         initComponents();
         
+        // set border to the jpanel title
         Border panel_title_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(255,255,255));
         jPanel_Title.setBorder(panel_title_border);
         
+        // set a white border to the jlabel image
         Border jlabel_image_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(255,255,255));
         jLabel_Image.setBorder(jlabel_image_border);
         
+        // populate the combobox with type name
         bindCombo();
         
+        // when the form show up 
+        // populate the jtable with all the properties
         fillJtableWithPropertiesData();
         
+        // change the jtable row height
         jTable_properties.setRowHeight(40);
-       
+        // change the jtable selection background
         jTable_properties.setSelectionBackground(new Color(27,150,77));
-       
+        // change the "ID" column width
         jTable_properties.getColumnModel().getColumn(0).setPreferredWidth(25);
-        
+        // change the "Address" column width
         jTable_properties.getColumnModel().getColumn(1).setPreferredWidth(250);
     }
 
+    // create a function to populate the jcombobox with types data
     public void bindCombo()
     {
         for(String s : map.keySet())
@@ -55,16 +71,23 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
             jComboBox_types.addItem(s);
         }
    }
-   
+    
+    
+    // create a function to populate the jtable with properties data
     public void fillJtableWithPropertiesData()
     {
         P_PROPERTY property = new P_PROPERTY();
         ArrayList<P_PROPERTY> propertyList = property.propertiesList();
-         
+        
+        // the jtable columns 0      1    
         String[] colNames = {"ID","Address"};
         
+        // the jtable row
+        // ownersList.size() = the size of the arraylist
+        // 6 = the number of columns
         Object[][] rows = new Object[propertyList.size()][2];
         
+        // add data form the list to the rows
         for(int i = 0; i < propertyList.size(); i++)
         {
             rows[i][0] = propertyList.get(i).getId();
@@ -316,6 +339,9 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Add_ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_ImageActionPerformed
 
+        // add images to the property
+        // you can add multiple images to a property
+        // we need to get the property id from the jtable
         P_PROPERTY property = new P_PROPERTY();
         
         if(propertyId != 0)
@@ -338,12 +364,17 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
         try
         {
+            // set the property id
             int rowIndex = jTable_properties.getSelectedRow();// selected jtable row index
             int id = Integer.valueOf(jTable_properties.getValueAt(rowIndex, 0).toString());// get the id from the jtable
             
+            
+            // first check if this property contains images
+            // we will use the jlist to do that
             if(jList1.getModel().getSize() > 0)
             {
-                
+                // show the selected property images in a slider
+                // and set the id to the slider form
                 PROPERTY_IMAGES_SLIDER imagesSliderform = new PROPERTY_IMAGES_SLIDER(id);
                 imagesSliderform.setVisible(true);
                 imagesSliderform.pack();        
@@ -370,10 +401,11 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
         try
         {
-        
+          // remove the selected image
         String selectedListItem = String.valueOf(jList1.getSelectedValue());
         Integer imageId = Integer.valueOf(selectedListItem);
         
+        // show a confirmation message before deleting the type
         int yes_or_no = JOptionPane.showConfirmDialog(null, "Do You Realy Want To Delete This Image", "Delete Image", JOptionPane.YES_NO_OPTION);
 
         if(yes_or_no == JOptionPane.YES_OPTION)
@@ -395,6 +427,8 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_Remove_ImageActionPerformed
 
+    // create a function to resize the image to the jlabel
+    // make this function allow a byte[] param
     public ImageIcon resizeImage(String path, byte[] byteImage)
     {
         ImageIcon pic;
@@ -408,11 +442,14 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
     
     private void jButton_Browse_ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Browse_ImageActionPerformed
        
+        // browse image from the computer
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Select The Property Image");
-        
+        // C:\\images = is where my images are located
+        // images from pixabay.com
         fileChooser.setCurrentDirectory(new File("C:\\images"));
-       
+        
+        // file extension
         FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("Images", ".jpg",".png",".jpeg");
         fileChooser.addChoosableFileFilter(fileFilter);
         
@@ -429,14 +466,20 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
     private void jComboBox_typesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_typesActionPerformed
 
+        // show properties in the jtable depending on the selected type
         int typeId = map.get(jComboBox_types.getSelectedItem().toString()); 
         P_PROPERTY property = new P_PROPERTY();
         ArrayList<P_PROPERTY> propertyList = property.propertiesListByType(typeId);
-         
+        
+        // the jtable columns 0      1    
         String[] colNames = {"ID","Address"};
         
+        // the jtable row
+        // ownersList.size() = the size of the arraylist
+        // 6 = the number of columns
         Object[][] rows = new Object[propertyList.size()][2];
         
+        // add data form the list to the rows
         for(int i = 0; i < propertyList.size(); i++)
         {
             rows[i][0] = propertyList.get(i).getId();
@@ -450,8 +493,12 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
     private void jTable_propertiesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_propertiesMouseClicked
         
+        // get the property id from the jtable
+        // get the selected row index
         int rowIndex = jTable_properties.getSelectedRow();
         propertyId = Integer.valueOf(jTable_properties.getValueAt(rowIndex, 0).toString());
+        
+        // display the selected property images list in the jlist
         
         fillTypeList();
         
@@ -459,9 +506,12 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
        
+        // try and catch if the list is empty
         try
         {
-            
+            // display the selected image from the list to jlabel
+            // we can use the hashmap if we want like in the "property window"
+            // but here instead will creat a function to the image by id
             String selectedListItem = String.valueOf(jList1.getSelectedValue());
             Integer imageId = Integer.valueOf(selectedListItem);
             byte[] image = new P_PROPERTY().getImageById(imageId);
@@ -469,17 +519,22 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
         }
         catch(Exception ex)
         {
-            
+            // nothing
+            // or a new black hole
         }
         
         
     }//GEN-LAST:event_jList1MouseClicked
 
-  
+    
+    
+    
+    
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
        
     }//GEN-LAST:event_jList1ValueChanged
 
+    // create a function to populate the JList With The Selected Property Images ID
     public void fillTypeList()
     {
         HashMap<byte[], Integer> imagesListMap = new P_PROPERTY().propertyImagesList(propertyId);
@@ -503,7 +558,30 @@ public class PROPERTY_IMAGES_WINDOW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_IMAGES_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PROPERTY_IMAGES_WINDOW().setVisible(true);
