@@ -31,3 +31,7 @@ JOTTING DOWN AND SKETCHING IDEAS
 
 IDEAL FLOW DIAGRAM OF APPLICATION
 ![Real_estate_flow drawio](https://user-images.githubusercontent.com/114785167/206947788-42ce5ea6-1701-40c7-b852-849fd9009df3.png)
+
+IDEAL CLASS DIAGRAM OF REM
+
+![class_diagram_rem](https://user-images.githubusercontent.com/114785167/206963347-c923d283-c326-48cf-a6a6-f1e47c77edc8.png)
