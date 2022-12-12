@@ -10,11 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
- * @author 919920
+ * @author 1BestCsharp
  */
 public class LOGIN_WINDOW extends javax.swing.JFrame {
 
@@ -71,11 +75,11 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel_Image.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel_Image.setBackground(new java.awt.Color(0, 153, 153));
         jLabel_Image.setOpaque(true);
 
         jLabel_Title.setFont(new java.awt.Font("Arial", 1, 70)); // NOI18N
-        jLabel_Title.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel_Title.setForeground(new java.awt.Color(51, 51, 51));
         jLabel_Title.setText("LOGIN");
 
         jLabel_Username_Icon.setBackground(new java.awt.Color(204, 204, 255));
@@ -108,7 +112,7 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
             }
         });
 
-        jButton_Login.setBackground(new java.awt.Color(0, 102, 204));
+        jButton_Login.setBackground(new java.awt.Color(51, 51, 51));
         jButton_Login.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Login.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Login.setText("Log In");
@@ -125,26 +129,23 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_Title))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_Login, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel_Username_Icon, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                                     .addComponent(jLabel_Password_Icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(10, 10, 10)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jPasswordField1))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jTextField_Username)))))))
-                .addGap(26, 26, 26))
+                                    .addComponent(jTextField_Username)
+                                    .addComponent(jPasswordField1))))
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel_Title)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +153,9 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
                 .addComponent(jLabel_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addGap(92, 92, 92)
                 .addComponent(jLabel_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addGap(124, 124, 124)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField_Username, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jLabel_Username_Icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -239,11 +240,44 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
        
         String username = jTextField_Username.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-        
+//        String role = comboBox.getSelectedItem().toString();
         PreparedStatement ps;
         ResultSet rs;
         
         String selectquery = "SELECT * FROM `users` WHERE `username` = ? AND password = ?";
+        
+//                     ps = THE_CONNECTION.getTheConnection().prepareStatement(selectquery);
+//                
+//                ps.setString(1, username);
+//                ps.setString(2, password);
+//                
+//                rs = ps.executeQuery();
+//                
+//                if(rs.next())
+//                {
+//                    if(rs.getString(4).equals("Manager")) {
+//                        MANAGER_WINDOW mainform = new MANAGER_WINDOW();
+//                        mainform.setVisible(true);
+//                        mainform.pack();
+//                        mainform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//                        this.dispose();
+//                    } else {
+//                   
+//                    MAIN_APP_WINDOW mainform = new MAIN_APP_WINDOW();
+//                    mainform.setVisible(true);
+//                    mainform.pack();
+//                    mainform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//               
+//                    this.dispose();
+//                    }
+//                }
+//                else{
+//                    JOptionPane.showMessageDialog(null, "Invalid Username or Password","Wrong Data",2);
+//                }
+//                
+//            } catch (SQLException ex) {
+//                Logger.getLogger(LOGIN_WINDOW.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         
         // check the fields value
         if(username.trim().toLowerCase().equals("username") || 
@@ -264,13 +298,57 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
                 
                 if(rs.next())
                 {
-                   // show the main form
+                    if(rs.getString(4).equals("Owner")) {
+                        OWNER_APP_WINDOW ownerform = new OWNER_APP_WINDOW();
+                        ownerform.setVisible(true);
+                        ownerform.pack();
+                        ownerform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if(rs.getString(4).equals("Client")){
+                        CLIENT_APP_WINDOW clientform = new CLIENT_APP_WINDOW();
+                        clientform.setVisible(true);
+                        clientform.pack();
+                        clientform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if(rs.getString(4).equals("Lawyer")){
+                        LAWYER_APP_WINDOW lawyerform = new LAWYER_APP_WINDOW();
+                        lawyerform.setVisible(true);
+                        lawyerform.pack();
+                        lawyerform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if(rs.getString(4).equals("Sales")){
+                        SALE_WINDOW salesform = new SALE_WINDOW();
+                        salesform.setVisible(true);
+                        salesform.pack();
+                        salesform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if(rs.getString(4).equals("Lister")){
+                        LISTER_APP_WINDOW listerform = new LISTER_APP_WINDOW();
+                        listerform.setVisible(true);
+                        listerform.pack();
+                        listerform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if(rs.getString(4).equals("Insurance")){
+                        LISTER_APP_WINDOW insuranceform = new LISTER_APP_WINDOW();
+                        insuranceform.setVisible(true);
+                        insuranceform.pack();
+                        insuranceform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if(rs.getString(4).equals("Manager")){
+                        LISTER_APP_WINDOW managerform = new LISTER_APP_WINDOW();
+                        managerform.setVisible(true);
+                        managerform.pack();
+                        managerform.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else{
+                   
                     MAIN_APP_WINDOW mainform = new MAIN_APP_WINDOW();
                     mainform.setVisible(true);
                     mainform.pack();
                     mainform.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                    // close the login window
+               
                     this.dispose();
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Invalid Username or Password","Wrong Data",2);
@@ -282,7 +360,9 @@ public class LOGIN_WINDOW extends javax.swing.JFrame {
             
             
         }
-        
+
+//Manager
+//Insurance
        
     }//GEN-LAST:event_jButton_LoginActionPerformed
 

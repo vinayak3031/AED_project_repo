@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 1BestCsharp
+ * @author Divya
  */
 public class CLIENT_WINDOW extends javax.swing.JFrame {
 
