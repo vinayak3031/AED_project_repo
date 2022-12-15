@@ -3,6 +3,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -35,7 +41,7 @@ public class SHOW_PROPERTIES_LISTER extends javax.swing.JFrame {
     public void fillJtableWithPropertiesData()
     {
         P_PROPERTY property = new P_PROPERTY();
-        ArrayList<P_PROPERTY> propertyList = property.propertiesList();
+        ArrayList<P_PROPERTY> propertyList = property.propertiesListed();
         
         // the jtable columns 0      1      2            3       4        5           6          7        8      9        10       11        12        13
         String[] colNames = {"ID","Type","square_feet","Owner","Price","Address","Bedrooms","Bathrooms","Age","Balcony","Pool","Backyard","Garage","Description"};
@@ -224,7 +230,7 @@ public class SHOW_PROPERTIES_LISTER extends javax.swing.JFrame {
         
         if(!String.valueOf(propertyId).trim().equals(""))// if the type name is not empty
         {
-          if(type.execTypeQuery("add", type))
+          if(type.execTypeQuery("update", type))
           {
               JOptionPane.showMessageDialog(null, "Listing sent for verification", "Add Type", 1);
           }else{
@@ -234,9 +240,10 @@ public class SHOW_PROPERTIES_LISTER extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Enter The Type Name", "Empty Name", 2);
         }
-        
+        fillJtableWithPropertiesData();
     }//GEN-LAST:event_jButton1_VerificationActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

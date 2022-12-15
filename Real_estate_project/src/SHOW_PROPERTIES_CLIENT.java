@@ -1,6 +1,13 @@
 
 import java.awt.Color;
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -9,11 +16,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Divya
  */
 public class SHOW_PROPERTIES_CLIENT extends javax.swing.JFrame {
+    
+    int clientId;
 
     /**
      * Creates new form SHOW_PROPERTIES_CLIENT
      */
-    public SHOW_PROPERTIES_CLIENT() {
+    public SHOW_PROPERTIES_CLIENT(int clientId) {
+        this.clientId = clientId;
         initComponents();
         fillJtableWithPropertiesData();
         
@@ -157,9 +167,7 @@ public class SHOW_PROPERTIES_CLIENT extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -174,9 +182,9 @@ public class SHOW_PROPERTIES_CLIENT extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -212,7 +220,24 @@ public class SHOW_PROPERTIES_CLIENT extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1_InterestedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_InterestedActionPerformed
-        // TODO add your handling code here:
+//        int ID, int PROPERTY_ID, int CLIENT_ID, String FINAL_PRICE, String SELLING_DATE
+        int selectedRowIndex = jTable1.getSelectedRow();  
+        PreparedStatement ps;
+        Boolean res = false;
+        
+        int propertyId = Integer.valueOf(jTable1.getValueAt(selectedRowIndex,0).toString());
+        String finalPrice = jTable1.getValueAt(selectedRowIndex, 4).toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String sellingate = dateFormat.format(date);
+        P_SALE sale = new P_SALE(0, propertyId, this.clientId, finalPrice, sellingate);
+
+        if(new P_SALE().addNewSale(sale)){
+            JOptionPane.showMessageDialog(null, "A New Sale Has Been Created and Added", "Add Sale", 1);
+        } else{
+            JOptionPane.showMessageDialog(null, "Sale Not Created", "Add Sale", 2);
+        }
+        fillJtableWithPropertiesData();
     }//GEN-LAST:event_jButton1_InterestedActionPerformed
 
     /**
@@ -245,7 +270,7 @@ public class SHOW_PROPERTIES_CLIENT extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SHOW_PROPERTIES_CLIENT().setVisible(true);
+                new SHOW_PROPERTIES_CLIENT(0).setVisible(true);
             }
         });
     }

@@ -13,11 +13,9 @@ import javax.swing.JFrame;
  */
 public class OWNER_APP_WINDOW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form OWNER_APP_WINDOW
-     */
     public OWNER_APP_WINDOW() {
         initComponents();
+                jLabel_APP_ICO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png")));
     }
 
     /**
@@ -38,7 +36,7 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
         jLabel_PropertyType = new javax.swing.JLabel();
         jLabel_PropertyImages = new javax.swing.JLabel();
         jButton1_Back = new javax.swing.JButton();
-        jLabel_PropertyImages1 = new javax.swing.JLabel();
+        jLabel_PropertyDocument = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +128,9 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
             }
         });
 
+        jButton1_Back.setBackground(new java.awt.Color(0, 153, 255));
+        jButton1_Back.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton1_Back.setForeground(new java.awt.Color(255, 255, 255));
         jButton1_Back.setText("GO BACK");
         jButton1_Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,21 +138,21 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
             }
         });
 
-        jLabel_PropertyImages1.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel_PropertyImages1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel_PropertyImages1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_PropertyImages1.setText("  Property-Document");
-        jLabel_PropertyImages1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel_PropertyImages1.setOpaque(true);
-        jLabel_PropertyImages1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_PropertyDocument.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel_PropertyDocument.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel_PropertyDocument.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_PropertyDocument.setText("  Property-Document");
+        jLabel_PropertyDocument.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_PropertyDocument.setOpaque(true);
+        jLabel_PropertyDocument.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_PropertyImages1MouseClicked(evt);
+                jLabel_PropertyDocumentMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel_PropertyImages1MouseEntered(evt);
+                jLabel_PropertyDocumentMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel_PropertyImages1MouseExited(evt);
+                jLabel_PropertyDocumentMouseExited(evt);
             }
         });
 
@@ -170,7 +171,7 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
                     .addComponent(jLabel_Property, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_PropertyType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_PropertyImages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_PropertyImages1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_PropertyDocument, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -184,8 +185,8 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_PropertyImages, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_PropertyImages1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addComponent(jLabel_PropertyDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                 .addComponent(jButton1_Back)
                 .addGap(43, 43, 43))
         );
@@ -243,7 +244,6 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_PropertyMouseExited
 
     private void jLabel_PropertyTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyTypeMouseClicked
-
         // open the property types form
         PROPERTY_TYPE_WINDOW typeform = new PROPERTY_TYPE_WINDOW();
         typeform.setVisible(true);
@@ -296,17 +296,26 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1_BackActionPerformed
 
-    private void jLabel_PropertyImages1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyImages1MouseClicked
+    private void jLabel_PropertyDocumentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyDocumentMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel_PropertyImages1MouseClicked
+        PROPERTY_DOCUMENTS_WINDOW propertyDocumentsWindow = new PROPERTY_DOCUMENTS_WINDOW();
+        propertyDocumentsWindow.setVisible(true);
+        propertyDocumentsWindow.pack();        
+        propertyDocumentsWindow.setLocationRelativeTo(null);
+        propertyDocumentsWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jLabel_PropertyDocumentMouseClicked
 
-    private void jLabel_PropertyImages1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyImages1MouseEntered
+    private void jLabel_PropertyDocumentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyDocumentMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel_PropertyImages1MouseEntered
+        jLabel_PropertyDocument.setBackground(Color.white);
+        jLabel_PropertyDocument.setForeground(new Color(102,102,102));
+    }//GEN-LAST:event_jLabel_PropertyDocumentMouseEntered
 
-    private void jLabel_PropertyImages1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyImages1MouseExited
+    private void jLabel_PropertyDocumentMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyDocumentMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel_PropertyImages1MouseExited
+        jLabel_PropertyDocument.setBackground(new Color(102,102,102));
+        jLabel_PropertyDocument.setForeground(Color.white);
+    }//GEN-LAST:event_jLabel_PropertyDocumentMouseExited
 
     /**
      * @param args the command line arguments
@@ -348,8 +357,8 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_APP_ICO;
     private javax.swing.JLabel jLabel_APP_Name;
     private javax.swing.JLabel jLabel_Property;
+    private javax.swing.JLabel jLabel_PropertyDocument;
     private javax.swing.JLabel jLabel_PropertyImages;
-    private javax.swing.JLabel jLabel_PropertyImages1;
     private javax.swing.JLabel jLabel_PropertyType;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -19,6 +19,7 @@ public class P_TYPE {
     private String description;
     
     
+    // create the geters and seters
     public Integer getId()
     {
         return id;
@@ -49,6 +50,8 @@ public class P_TYPE {
         this.description = DESCRIPTION;
     }
     
+    
+    // create the class constructors
     public P_TYPE(){}
     
     public P_TYPE(Integer ID,String NAME, String DESCRIPTION)
@@ -59,15 +62,17 @@ public class P_TYPE {
     }
     
     
+    // create a function to insert - edit - remove type
     public boolean execTypeQuery(String queryType, P_TYPE type)
     {
         
         PreparedStatement ps;
         
+        // add a new type
         if(queryType.equals("add"))
         {
             try {
-                
+                // query -> INSERT INTO `property_type`(`name`, `description`) VALUES (?,?)
                 ps = THE_CONNECTION.getTheConnection().prepareStatement("INSERT INTO `property_type`(`name`, `description`) VALUES (?,?)");
                 ps.setString(1, type.getName());
                 ps.setString(2, type.getDescription());
@@ -80,11 +85,11 @@ public class P_TYPE {
             }
         }
         
-        
+        // add a new type
         else if(queryType.equals("edit"))
         {
             try {
-         
+                // query -> UPDATE `property_type` SET `name`=?,`description`=? WHERE `id` = ?
                 ps = THE_CONNECTION.getTheConnection().prepareStatement("UPDATE `property_type` SET `name`=?,`description`=? WHERE `id` = ?");
                 ps.setString(1, type.getName());
                 ps.setString(2, type.getDescription());
@@ -98,11 +103,11 @@ public class P_TYPE {
             }
         }
         
-        
+        // add a new type
         else if(queryType.equals("remove"))
         {
             try {
-               
+                // query -> DELETE FROM `property_type` WHERE `id`= ?
                 ps = THE_CONNECTION.getTheConnection().prepareStatement("DELETE FROM `property_type` WHERE `id`= ?");
                 ps.setInt(1, type.getId());
                 
@@ -122,6 +127,9 @@ public class P_TYPE {
     }
     
     
+    // create a function to return a list of all types in a HashMap
+    // string is the key
+    // integer is the value
     public HashMap<String,Integer> getTypesMap()
     {
         HashMap<String, Integer> map = new HashMap<>();
@@ -151,6 +159,9 @@ public class P_TYPE {
     }
     
     
+    // create a function to get a type data by id
+    // we can use getTypesMap() function to get the id and name
+    // but we want the description to
     public P_TYPE getTypeById(Integer id)
     {
         PreparedStatement ps;

@@ -15,16 +15,13 @@ public class PROPERTY_TYPE_WINDOW extends javax.swing.JFrame {
 
     public PROPERTY_TYPE_WINDOW() {
         initComponents();
-        
         Border panel_title_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(125,125,125));
         jPanel_Title.setBorder(panel_title_border);
-      
         Border button_border = BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(255,255,255));
         jButton_Add_Type.setBorder(button_border);
         jButton_Edit_Type.setBorder(button_border);
         jButton_Remove_Type.setBorder(button_border);
         jButton_Refresh.setBorder(button_border);
-        
         fillTypeList();
     }
     
@@ -249,7 +246,7 @@ public class PROPERTY_TYPE_WINDOW extends javax.swing.JFrame {
         
         P_TYPE type = new P_TYPE(0,name,description);
         
-        if(!name.trim().equals(""))
+        if(!name.trim().equals(""))// if the type name is not empty
         {
           if(type.execTypeQuery("add", type))
           {
@@ -267,7 +264,6 @@ public class PROPERTY_TYPE_WINDOW extends javax.swing.JFrame {
     private void jButton_Edit_TypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_TypeActionPerformed
         
         try{
-           
             Integer id = Integer.valueOf(jTextField_Id.getText());
             String name = jTextField_Name.getText();
             String description = jTextArea_Description.getText();
@@ -355,7 +351,30 @@ public class PROPERTY_TYPE_WINDOW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_TYPE_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_TYPE_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_TYPE_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PROPERTY_TYPE_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PROPERTY_TYPE_WINDOW().setVisible(true);

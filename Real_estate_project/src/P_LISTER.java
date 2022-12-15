@@ -1,14 +1,9 @@
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 /**
  *
@@ -48,14 +43,13 @@ public class P_LISTER {
         
         PreparedStatement ps;
         
-        // add a new type
-        if(queryType.equals("add"))
+        if(queryType.equals("update"))
         {
             try {
-                // query -> INSERT INTO `property_type`(`name`, `description`) VALUES (?,?)
-                ps = THE_CONNECTION.getTheConnection().prepareStatement("INSERT INTO `property_listed`(`propertyId`, `ownerId`) VALUES (?,?)");
-                ps.setString(1, String.valueOf(type.getPropertyId()));
-                ps.setString(2, String.valueOf(type.getOwnerId()));
+                
+                ps = THE_CONNECTION.getTheConnection().prepareStatement("UPDATE `the_property` SET listed = ? WHERE id = ?");
+                ps.setString(1, String.valueOf("Y"));
+                ps.setString(2, String.valueOf(type.getPropertyId()));
                 
                 return (ps.executeUpdate() > 0);
                 

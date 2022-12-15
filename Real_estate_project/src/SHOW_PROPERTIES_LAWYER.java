@@ -42,7 +42,7 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
     public void fillJtableWithPropertiesData()
     {
         P_PROPERTY property = new P_PROPERTY();
-        ArrayList<P_PROPERTY> propertyList = property.propertiesList();
+        ArrayList<P_PROPERTY> propertyList = property.propertiesListLawyer();
         
         // the jtable columns 0      1      2            3       4        5           6          7        8      9        10       11        12        13
         String[] colNames = {"ID","Type","square_feet","Owner","Price","Address","Bedrooms","Bathrooms","Age","Balcony","Pool","Backyard","Garage","Description"};
@@ -112,6 +112,7 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel_Image = new javax.swing.JLabel();
+        verifyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +158,15 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
         jLabel_Image.setBackground(new java.awt.Color(255, 204, 204));
         jLabel_Image.setOpaque(true);
 
+        verifyButton.setBackground(new java.awt.Color(0, 153, 255));
+        verifyButton.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        verifyButton.setForeground(new java.awt.Color(255, 255, 255));
+        verifyButton.setText("Verify");
+        verifyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verifyButtonActionPerformed(evt);
+            }
+        });
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,6 +178,8 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
                     .addComponent(jButton_Show_Images, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(verifyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -179,11 +191,17 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Show_Images, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(verifyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,6 +289,19 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
         fillTypeList();
     }//GEN-LAST:event_jTable_lawyerMouseClicked
 
+    private void verifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyButtonActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = jTable_lawyer.getSelectedRow();
+        propertyId = Integer.valueOf(jTable_lawyer.getValueAt(rowIndex, 0).toString());
+        P_PROPERTY property = new P_PROPERTY();
+        
+        if(property.verifyProperty(propertyId)) {
+              JOptionPane.showMessageDialog(null, "Property Verified", "Approved", 1);
+        } else{
+                JOptionPane.showMessageDialog(null, "Error while Updating", "Error", 2);
+        }
+        fillJtableWithPropertiesData();
+    }//GEN-LAST:event_verifyButtonActionPerformed
     public void fillTypeList()
     {
         HashMap<byte[], Integer> imagesListMap = new P_PROPERTY().propertyImagesList(propertyId);
@@ -330,5 +361,6 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_lawyer;
+    private javax.swing.JButton verifyButton;
     // End of variables declaration//GEN-END:variables
 }

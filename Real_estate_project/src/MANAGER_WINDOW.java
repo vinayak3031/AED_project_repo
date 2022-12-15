@@ -8,11 +8,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 /**
  *
  * @author diksharawat
@@ -21,9 +16,6 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
     
     private String user_id;
 
-    /**
-     * Creates new form MANAGER_WINDOW
-     */
     public MANAGER_WINDOW() {
         initComponents();
         fillJtableSales();
@@ -33,17 +25,12 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
     public void fillJtableSales()
     {
         P_SALE sale = new P_SALE();
-        ArrayList<P_SALE> salesList = sale.salesList();
+        ArrayList<P_SALE> salesList = sale.salesListIntrested();
         
-        // the jtable columns
         String[] colNames = {"Sale ID","Property ID","Client ID","Final Price","Sale Date"};
         
-        // the jtable row
-        // ownersList.size() = the size of the arraylist
-        // 5 = the number of columns
         Object[][] rows = new Object[salesList.size()][5];
         
-        // add data form the list to the rows
         for(int i = 0; i < salesList.size(); i++)
         {
             rows[i][0] = salesList.get(i).getId();
@@ -187,12 +174,10 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Approve_SaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Approve_SaleActionPerformed
 
-        // add a new Sale
-        //int id = Integer.valueOf(jTextField_Id.getText());
-
         try
         {
             approveSale();
+            removeFromListing();
             fillJtableSales();
             changeClientToOwner();
 
@@ -205,8 +190,6 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_Approve_SaleActionPerformed
 
     private void jButton_Remove_SaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Remove_SaleActionPerformed
-
-        // remove the selected sale
 
         try{
             rejectSale();
@@ -222,30 +205,7 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MANAGER_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MANAGER_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MANAGER_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MANAGER_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MANAGER_WINDOW().setVisible(true);
@@ -268,13 +228,30 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
         int rs;
         int selectedRowIndex = jTable_Sales.getSelectedRow();
         user_id = jTable_Sales.getValueAt(selectedRowIndex, 2).toString();
-        String insertquery = "UPDATE `sale` SET flg_auth = ? WHERE id = ?" ;
+        String insertquery = "UPDATE `sale` SET flg_auth = ? WHERE property_id = ?" ;
             try {
                 
                 ps = THE_CONNECTION.getTheConnection().prepareStatement(insertquery);
-                ps.setString(1, "Y");
+                ps.setString(1, "A");
                 ps.setString(2, jTable_Sales.getValueAt(selectedRowIndex, 1).toString());
                 System.out.println(jTable_Sales.getValueAt(selectedRowIndex, 1));
+                rs = ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Sale Successfully created!","Empty Field",2);     
+            } catch (SQLException ex) {
+                Logger.getLogger(LOGIN_WINDOW.class.getName()).log(Level.SEVERE, null, ex);
+            }       
+    }
+    
+    private void removeFromListing() {
+        PreparedStatement ps;
+        int rs;
+        int selectedRowIndex = jTable_Sales.getSelectedRow();
+        user_id = jTable_Sales.getValueAt(selectedRowIndex, 2).toString();
+        String insertquery = "UPDATE `the_property` SET listed = 'S' WHERE id = ?" ;
+            try {
+                
+                ps = THE_CONNECTION.getTheConnection().prepareStatement(insertquery);
+                ps.setString(1, jTable_Sales.getValueAt(selectedRowIndex, 1).toString());
                 rs = ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Sale Successfully created!","Empty Field",2);     
             } catch (SQLException ex) {
@@ -299,6 +276,8 @@ public class MANAGER_WINDOW extends javax.swing.JFrame {
                 Logger.getLogger(LOGIN_WINDOW.class.getName()).log(Level.SEVERE, null, ex);
             }  
     }
+    
+
 
     private void rejectSale() {
         PreparedStatement ps;

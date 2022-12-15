@@ -7,11 +7,11 @@ import javax.swing.JFrame;
  * @author Divya
  */
 public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
+    
+    int clientId;
 
-    /**
-     * Creates new form CLIENT_APP_WINDOW
-     */
-    public CLIENT_APP_WINDOW() {
+    public CLIENT_APP_WINDOW(int clientId) {
+        this.clientId = clientId;
         initComponents();
                 jLabel_APP_ICO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png")));
 
@@ -152,8 +152,7 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
 
     private void jLabel_PropertyClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyClientMouseClicked
 
-        // open the property form
-        SHOW_PROPERTIES_CLIENT showPropertyclient = new SHOW_PROPERTIES_CLIENT();
+        SHOW_PROPERTIES_CLIENT showPropertyclient = new SHOW_PROPERTIES_CLIENT(clientId);
         showPropertyclient.setVisible(true);
         showPropertyclient.pack();        
         showPropertyclient.setLocationRelativeTo(null);
@@ -209,7 +208,7 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CLIENT_APP_WINDOW().setVisible(true);
+                new CLIENT_APP_WINDOW(0).setVisible(true);
             }
         });
     }

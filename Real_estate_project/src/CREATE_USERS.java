@@ -1,4 +1,3 @@
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,7 +42,7 @@ public class CREATE_USERS extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        selectUserRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Owner", "Client", "Lawyer", "Sales", "Manager", "Lister", "Insurance" }));
+        selectUserRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lawyer", "Sales", "Manager", "Lister", "Insurance" }));
         selectUserRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectUserRoleActionPerformed(evt);
@@ -155,7 +154,7 @@ public class CREATE_USERS extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Enter The Required User Information","Empty Field", 2);
         }
         
-        
+
         // check the fields value
         if(username.trim().toLowerCase().equals("username") || 
            password.trim().toLowerCase().equals("password"))
@@ -191,6 +190,7 @@ public class CREATE_USERS extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
