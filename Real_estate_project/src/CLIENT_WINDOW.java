@@ -10,6 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
@@ -17,34 +22,54 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CLIENT_WINDOW extends javax.swing.JFrame {
 
-   
+    /*
+    
+    this window and the owner window are identical we can use the window if we want
+    and even the same class.
+    but we will use a diffrent ones to make it easy to understand.
+    
+    */
+    
+    
+    /**
+     * Creates new form CLIENT_WINDOW
+     */
     public CLIENT_WINDOW() {
         initComponents();
         
-        
+        // set border to the jpanel title
         Border panel_title_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(235,125,22));
         jPanel_Title.setBorder(panel_title_border);
         
+        // set border to the jbuttons
         Border button_border = BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(255,255,255));
         jButton_Add_Client.setBorder(button_border);
         jButton_Edit_Client.setBorder(button_border);
         jButton_Remove_Client.setBorder(button_border);
         jButton_Refresh.setBorder(button_border);
-     
         fillJtableWithClientsData();
         
     }
     
     
+
+    // we will create a function to populate the jtable with all the clients data using the arraylist
+    // after that, when the user select a client from the jtable all the information 
+    // will be displayed in jtextfields
     public void fillJtableWithClientsData()
     {
         P_CLIENT client = new P_CLIENT();
         ArrayList<P_CLIENT> clientList = client.clientsList();
         
+        // the jtable columns
         String[] colNames = {"ID","First Name","Last Name","Phone","Email","Address"};
         
+        // the jtable row
+        // ownersList.size() = the size of the arraylist
+        // 6 = the number of columns
         Object[][] rows = new Object[clientList.size()][6];
         
+        // add data form the list to the rows
         for(int i = 0; i < clientList.size(); i++)
         {
             rows[i][0] = clientList.get(i).getId();
@@ -57,9 +82,13 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
         
         DefaultTableModel model = new DefaultTableModel(rows, colNames);
         jTable1.setModel(model);
+        // change the jtable row height
         jTable1.setRowHeight(40);
+        // change the jtable selection background
         jTable1.setSelectionBackground(new Color(27,150,77));
+        // change the "ID" column width
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(25);
+        // change the "Address" column width
         jTable1.getColumnModel().getColumn(5).setPreferredWidth(150);
         
     }
@@ -224,7 +253,6 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel9.setText("Password");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -345,7 +373,10 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
 
     private void jButton_Add_ClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_ClientActionPerformed
 
-        
+
+        // add a new client
+
+        // get the client data
         String fname = jTextField_FName.getText();
         String lname = jTextField_LName.getText();
         String phone = jTextField_Phone.getText();
@@ -354,6 +385,8 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
 
         P_CLIENT client = new P_CLIENT();
 
+        // before inserting a new client we need to check if the required data are empty
+        // required data -> first name, last name, phone, and address
 
         if( fname.trim().equals("") || lname.trim().equals("") || phone.trim().equals("") || address.trim().equals("") )
         {
@@ -370,7 +403,6 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Client NOT Added To The System", "Add Client", 2);
             }
         }
-            
     }//GEN-LAST:event_jButton_Add_ClientActionPerformed
     
     private void addUserClient() {                                           
@@ -420,7 +452,6 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
     
     private void jButton_Edit_ClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_ClientActionPerformed
 
-
         String fname = jTextField_FName.getText();
         String lname = jTextField_LName.getText();
         String phone = jTextField_Phone.getText();
@@ -433,6 +464,8 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
 
             int clientId = Integer.valueOf(jTextField_Id.getText());
 
+            // before editing the client data we need to check if the required data are empty
+            // required data -> first name, last name, phone, and address
 
             if( fname.trim().equals("") || lname.trim().equals("") || phone.trim().equals("") || address.trim().equals("") )
             {
@@ -459,6 +492,7 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
 
         try{
 
+            // deleting the selected client from the system
             int clientId = Integer.valueOf(jTextField_Id.getText());
 
             P_CLIENT client = new P_CLIENT();
@@ -468,7 +502,7 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Enter the Client ID", "Empty ID", 2);
             }
             else{
-
+                // show a confirmation message before deleting the type
                 int yes_or_no = JOptionPane.showConfirmDialog(null, "Do You Want To Delete This Client", "Delete Client", JOptionPane.YES_NO_OPTION);
 
                 if(yes_or_no == JOptionPane.YES_OPTION)
@@ -477,6 +511,7 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
                     {
                         JOptionPane.showMessageDialog(null, "Client Data Deleted", "Delete Client", 1);
                         
+                        // clear text fields after the delete
                           jTextField_Id.setText("");
                           jTextField_FName.setText("");
                           jTextField_LName.setText("");
@@ -500,6 +535,7 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
 
     private void jButton_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshActionPerformed
 
+        // call the fill jtable function to show the new data in jtable
         fillJtableWithClientsData();
 
     }//GEN-LAST:event_jButton_RefreshActionPerformed
@@ -520,7 +556,30 @@ public class CLIENT_WINDOW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CLIENT_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CLIENT_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CLIENT_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CLIENT_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CLIENT_WINDOW().setVisible(true);

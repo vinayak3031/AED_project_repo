@@ -167,7 +167,6 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
                 verifyButtonActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -303,7 +302,6 @@ public class SHOW_PROPERTIES_LAWYER extends javax.swing.JFrame {
         }
         fillJtableWithPropertiesData();
     }//GEN-LAST:event_verifyButtonActionPerformed
-
     public void fillTypeList()
     {
         HashMap<byte[], Integer> imagesListMap = new P_PROPERTY().propertyImagesList(propertyId);

@@ -2,6 +2,11 @@
 import java.awt.Color;
 import javax.swing.JFrame;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
 /**
  *
  * @author Divya
@@ -11,7 +16,6 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
     public OWNER_APP_WINDOW() {
         initComponents();
                 jLabel_APP_ICO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png")));
-
     }
 
     /**
@@ -216,6 +220,7 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
 
     private void jLabel_PropertyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyMouseClicked
 
+        // open the property form
         PROPERTY_WINDOW propertyform = new PROPERTY_WINDOW();
         propertyform.setVisible(true);
         propertyform.pack();
@@ -239,7 +244,7 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_PropertyMouseExited
 
     private void jLabel_PropertyTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyTypeMouseClicked
-
+        // open the property types form
         PROPERTY_TYPE_WINDOW typeform = new PROPERTY_TYPE_WINDOW();
         typeform.setVisible(true);
         typeform.pack();
@@ -264,6 +269,7 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
 
     private void jLabel_PropertyImagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyImagesMouseClicked
 
+        // open the property images form
         PROPERTY_IMAGES_WINDOW propertyImagesForm = new PROPERTY_IMAGES_WINDOW();
         propertyImagesForm.setVisible(true);
         propertyImagesForm.pack();
@@ -315,7 +321,30 @@ public class OWNER_APP_WINDOW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-      
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(OWNER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(OWNER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(OWNER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(OWNER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new OWNER_APP_WINDOW().setVisible(true);

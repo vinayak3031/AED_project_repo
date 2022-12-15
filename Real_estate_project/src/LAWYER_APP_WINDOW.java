@@ -1,19 +1,19 @@
 
-import java.awt.Color;
-import javax.swing.JFrame;
-
 /**
  *
  * @author Divya
  */
-public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
-    
-    int clientId;
 
-    public CLIENT_APP_WINDOW(int clientId) {
-        this.clientId = clientId;
-        initComponents();
-                jLabel_APP_ICO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png")));
+import java.awt.Color;
+import javax.swing.JFrame;
+public class LAWYER_APP_WINDOW extends javax.swing.JFrame {
+
+    /**
+     * Creates new form LAWYER_APP_WINDOW
+     */
+    public LAWYER_APP_WINDOW() {
+        initComponents();        
+        jLabel_APP_ICO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png")));
 
     }
 
@@ -73,7 +73,7 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
         jLabel_PropertyClient.setBackground(new java.awt.Color(102, 102, 102));
         jLabel_PropertyClient.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel_PropertyClient.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_PropertyClient.setText("  Property");
+        jLabel_PropertyClient.setText("Properties to verify");
         jLabel_PropertyClient.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_PropertyClient.setOpaque(true);
         jLabel_PropertyClient.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,13 +104,13 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_PropertyClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jButton1_Back)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_PropertyClient, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +118,7 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_PropertyClient, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addComponent(jButton1_Back)
                 .addGap(47, 47, 47))
         );
@@ -129,7 +129,7 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 442, Short.MAX_VALUE))
+                .addGap(0, 649, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,26 +152,24 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
 
     private void jLabel_PropertyClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyClientMouseClicked
 
-        SHOW_PROPERTIES_CLIENT showPropertyclient = new SHOW_PROPERTIES_CLIENT(clientId);
-        showPropertyclient.setVisible(true);
-        showPropertyclient.pack();        
-        showPropertyclient.setLocationRelativeTo(null);
-        showPropertyclient.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        // open the property form
+        SHOW_PROPERTIES_LAWYER showPropertylawyer = new SHOW_PROPERTIES_LAWYER();
+        showPropertylawyer.setVisible(true);
+        showPropertylawyer.pack();
+        showPropertylawyer.setLocationRelativeTo(null);
+        showPropertylawyer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jLabel_PropertyClientMouseClicked
 
     private void jLabel_PropertyClientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyClientMouseEntered
 
         jLabel_PropertyClient.setBackground(Color.white);
         jLabel_PropertyClient.setForeground(new Color(102,102,102));
-
     }//GEN-LAST:event_jLabel_PropertyClientMouseEntered
 
     private void jLabel_PropertyClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_PropertyClientMouseExited
 
         jLabel_PropertyClient.setBackground(new Color(102,102,102));
         jLabel_PropertyClient.setForeground(Color.white);
-
     }//GEN-LAST:event_jLabel_PropertyClientMouseExited
 
     private void jButton1_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_BackActionPerformed
@@ -195,20 +193,20 @@ public class CLIENT_APP_WINDOW extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CLIENT_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LAWYER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CLIENT_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LAWYER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CLIENT_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LAWYER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CLIENT_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LAWYER_APP_WINDOW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CLIENT_APP_WINDOW(0).setVisible(true);
+                new LAWYER_APP_WINDOW().setVisible(true);
             }
         });
     }

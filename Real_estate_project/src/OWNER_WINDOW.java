@@ -14,16 +14,22 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author diksharawat
+ * @author Divya
  */
 public class OWNER_WINDOW extends javax.swing.JFrame {
 
+    /**
+     * Creates new form OWNER_WINDOW
+     */
     public OWNER_WINDOW() {
         initComponents();
         
         
+        // set border to the jpanel title
         Border panel_title_border = BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(60,70,200));
         jPanel_Title.setBorder(panel_title_border);
+        
+        // set border to the jbuttons
         Border button_border = BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(255,255,255));
         jButton_Add_Owner.setBorder(button_border);
         jButton_Edit_Owner.setBorder(button_border);
@@ -31,6 +37,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
         jButton_Refresh.setBorder(button_border);
         jButton_Owner_Properties.setBorder(button_border);
         
+        // populate the jtable with owners data
         fillJtableWithOwnersData();
     }
     
@@ -243,7 +250,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
                 jTextFieldUserNameActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -442,8 +448,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
         
        
     }
-    
-    
     private void jButton_Edit_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Edit_OwnerActionPerformed
 
         
@@ -486,6 +490,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
 
         try{
             
+             // deleting the selected owner from the system
             int ownerId = Integer.valueOf(jTextField_Id.getText());
 
             P_OWNER owner = new P_OWNER();
@@ -496,6 +501,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
             }
             else{
             
+             // show a confirmation message before deleting the type
              int yes_or_no = JOptionPane.showConfirmDialog(null, "Do You Want To Delete This Owner", "Delete Owner", JOptionPane.YES_NO_OPTION);
 
               if(yes_or_no == JOptionPane.YES_OPTION)
@@ -525,8 +531,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
           }
         
     }//GEN-LAST:event_jButton_Remove_OwnerActionPerformed
-
- 
+    // get owner data on jtable mouse click
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         
         int selectedRowIndex = jTable1.getSelectedRow();
@@ -540,7 +545,8 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshActionPerformed
-      
+        
+        // call the fill jtable function to show the new data in jtable
         fillJtableWithOwnersData();
         
     }//GEN-LAST:event_jButton_RefreshActionPerformed
@@ -554,6 +560,7 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
             int selectedRowIndex = jTable1.getSelectedRow();
             int id = Integer.valueOf(jTable1.getValueAt(selectedRowIndex, 0).toString());
             
+            // set the owner id
             OWNER_PROPERTIES_FORM ownerPropertiesform = new OWNER_PROPERTIES_FORM(id);
             
             ownerPropertiesform.setVisible(true);
@@ -567,10 +574,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton_Owner_PropertiesActionPerformed
-
-    private void jTextFieldUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUserNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -628,7 +631,6 @@ public class OWNER_WINDOW extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea_Address;
     private javax.swing.JTextField jTextFieldUserName;
     private javax.swing.JTextField jTextField_Email;
     private javax.swing.JTextField jTextField_FName;
